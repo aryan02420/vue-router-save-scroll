@@ -8,7 +8,10 @@ const routes = [
     name: 'Home',
     component: Home,
     meta: {
-      scrollTop: 0,
+      scrollPos: {
+        top: 0,
+        left: 0,
+      },
     },
   },
   {
@@ -19,7 +22,7 @@ const routes = [
 ]
 
 const scrollBehavior = (to, from, savedPosition) => {
-  return savedPosition || { top: to.meta?.scrollTop || 0, left: 0 }
+  return savedPosition || to.meta?.scrollPos || { top: 0, left: 0 }
 }
 
 const router = createRouter({
@@ -30,9 +33,9 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   console.log('window.scrollY:', window.scrollY)
-  from.meta?.scrollTop && (from.meta.scrollTop = window.scrollY)
-  console.log('from:\t', from.name, '\t', from.meta)
-  console.log('to:\t\t', to.name, '\t', to.meta)
+  from.meta?.scrollPos && (from.meta.scrollPos.top = window.scrollY)
+  console.log('from:\t', from.name, '\t', from.meta?.scrollPos)
+  console.log('to:\t\t', to.name, '\t', to.meta?.scrollPos)
   return next()
 })
 
