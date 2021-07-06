@@ -22,6 +22,10 @@ const routes = [
 ]
 
 const scrollBehavior = (to, from, savedPosition) => {
+  if (to.name === from.name) {
+    to.meta?.scrollPos && (to.meta.scrollPos.top = 0)
+    return { left: 0, top: 0 }
+  }
   const scrollpos = savedPosition || to.meta?.scrollPos || { left: 0, top: 0 }
   return new Promise((resolve) => {
     setTimeout(() => {
