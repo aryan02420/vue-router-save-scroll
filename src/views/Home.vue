@@ -2,8 +2,8 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" />
+    <Filler :items="['A', 'B', 'C', 'D', 'E']" />
   </div>
-  <Filler :items="['A', 'B', 'C', 'D', 'E']" />
 </template>
 
 <script>

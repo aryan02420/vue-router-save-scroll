@@ -22,7 +22,12 @@ const routes = [
 ]
 
 const scrollBehavior = (to, from, savedPosition) => {
-  return savedPosition || to.meta?.scrollPos || { top: 0, left: 0 }
+  const scrollpos = savedPosition || to.meta?.scrollPos || { left: 0, top: 0 }
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(scrollpos)
+    }, 600)
+  })
 }
 
 const router = createRouter({
@@ -32,10 +37,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log('window.scrollY:', window.scrollY)
   from.meta?.scrollPos && (from.meta.scrollPos.top = window.scrollY)
-  console.log('from:\t', from.name, '\t', from.meta?.scrollPos)
-  console.log('to:\t\t', to.name, '\t', to.meta?.scrollPos)
   return next()
 })
 
